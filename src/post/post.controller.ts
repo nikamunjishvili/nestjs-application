@@ -14,7 +14,7 @@ export class PostController {
 
   @Get()
   findAll() {
-    return this.postService.findAll();
+    return this.postService.findAll().populate("user");
   }
 
   @Get(':id')

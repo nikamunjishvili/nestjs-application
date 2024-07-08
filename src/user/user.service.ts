@@ -32,8 +32,8 @@ export class UserService {
     return this.userModel.find().populate('posts');
   }
 
-  findOne(id: string) {
-    return this.userModel.findById(id);
+  findOne(email: string) {
+    return this.userModel.findOne({email});
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {

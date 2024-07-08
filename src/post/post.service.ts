@@ -26,7 +26,7 @@ export class PostService {
   }
 
   findAll() {
-    return `This action returns all post`;
+    return this.postModel.find();
   }
 
   findOne(id: number) {
