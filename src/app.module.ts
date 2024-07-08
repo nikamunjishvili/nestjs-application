@@ -12,8 +12,7 @@ import { ConfigModule } from '@nestjs/config';
     }),
     MongooseModule.forRoot(
       `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PASSWORD}@nest-autentication.8lz05oa.mongodb.net/?retryWrites=true&w=majority&appName=nest-autentication`,
-
-      ),
+    ),
     PostModule,
     UserModule,
     AuthModule,
