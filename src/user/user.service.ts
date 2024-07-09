@@ -33,7 +33,7 @@ export class UserService {
   }
 
   findOne(email: string) {
-    return this.userModel.findOne({email});
+    return this.userModel.findOne({email}).select(["email", "password"]);
   }
 
   update(id: number, updateUserDto: UpdateUserDto) {
