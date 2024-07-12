@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { PostModule } from './post/post.module';
-import { UserModule } from './user/user.module';
-import { AuthModule } from './auth/auth.module';
+import { PostModule } from './common/post/post.module';
+import { UserModule } from './common/user/user.module';
+import { AuthModule } from './common/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({

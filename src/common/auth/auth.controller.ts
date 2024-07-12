@@ -1,14 +1,14 @@
 import { Controller, Post, Body, HttpStatus, HttpCode, UseGuards, Get, Request } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { SignUpDto } from './dto/sign-up.dto.';
-import { SignInDto } from './dto/sign-in.dto';
+import { SignUpDto } from '../../../libs/auth-lib/src/dto/sign-up.dto.';
+import { SignInDto } from '../../../libs/auth-lib/src/dto/sign-in.dto';
 import { ApiTags, ApiResponse,ApiBadRequestResponse } from '@nestjs/swagger';
-import { AuthGuard } from './guard/auth.guard';
+import { AuthGuard } from '../../../libs/auth-lib/src/guard/auth.guard';
+import { AuthLibService } from 'libs/auth-lib';
 
 @ApiTags('auth')
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthLibService) {}
 
   @ApiResponse({
     status: HttpStatus.OK,
@@ -21,7 +21,6 @@ export class AuthController {
     return this.authService.signUp(signUpDto);
   }
 
-  // @UseGuards(AuthGuard)
   @Post('/sign-in')
   signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto);
