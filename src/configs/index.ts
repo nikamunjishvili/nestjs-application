@@ -1,0 +1,1 @@
+console.log("swagger config folder");

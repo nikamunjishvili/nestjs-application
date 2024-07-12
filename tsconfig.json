@@ -16,6 +16,26 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "libs/auth-lib": [
+        "libs/auth-lib/src"
+      ],
+      "libs/auth-lib/*": [
+        "libs/auth-lib/src/*"
+      ],
+      "libs/user-lib": [
+        "libs/user-lib/src"
+      ],
+      "libs/user-lib/*": [
+        "libs/user-lib/src/*"
+      ],
+      "libs/post-lib": [
+        "libs/post-lib/src"
+      ],
+      "libs/post-lib/*": [
+        "libs/post-lib/src/*"
+      ]
+    }
   }
 }
