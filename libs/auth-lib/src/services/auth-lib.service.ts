@@ -6,6 +6,8 @@ import { JwtService } from '@nestjs/jwt';
 import { UserAlreadyExists } from '../errors/user.errors';
 import { InvalidCredentials } from '../errors/invalid-credentials.error';
 import { UserLibService } from 'libs/user-lib';
+import { SignUpPayload } from '../dto/sign-up-payload.dto';
+import { SignInPayload } from '../dto/sign-in-payload.dto';
 
 @Injectable()
 export class AuthLibService {
@@ -14,16 +16,17 @@ export class AuthLibService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async signUp(signUpDto: SignUpDto) {
+  async signUp(signUpDto: SignUpDto): Promise<SignUpPayload> {
     const { email, password } = signUpDto;
     const existingUser = await this.usersService.findOne(email);
     if (existingUser) throw UserAlreadyExists;
 
     const hashedPassword = await bcrypt.hash(password, 5);
-    return this.usersService.create({ email, password: hashedPassword });
+    this.usersService.create({ email, password: hashedPassword });
+    return {success: true, message: "User registered success!!"}
   }
 
-  async signIn(signInDto: SignInDto) {
+  async signIn(signInDto: SignInDto):Promise<SignInPayload> {
     const { email, password } = signInDto;
     const user = await this.usersService.findOne(email);
     const arePasswordsEqual = await bcrypt.compare(password, user.password);

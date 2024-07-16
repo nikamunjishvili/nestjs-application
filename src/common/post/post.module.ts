@@ -13,4 +13,5 @@ import { PostLibService } from 'libs/post-lib';
   controllers: [PostController],
   providers: [PostLibService],
 })
+
 export class PostModule {}
