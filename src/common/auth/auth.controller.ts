@@ -1,9 +1,19 @@
-import { Controller, Post, Body, HttpStatus, HttpCode, UseGuards, Get, Request } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  HttpStatus,
+  HttpCode,
+  UseGuards,
+  Get,
+  Request,
+} from '@nestjs/common';
 import { SignUpDto } from '../../../libs/auth-lib/src/dto/sign-up.dto.';
 import { SignInDto } from '../../../libs/auth-lib/src/dto/sign-in.dto';
-import { ApiTags, ApiResponse,ApiBadRequestResponse } from '@nestjs/swagger';
+import { ApiTags, ApiResponse, ApiBadRequestResponse } from '@nestjs/swagger';
 import { AuthGuard } from '../../../libs/auth-lib/src/guard/auth.guard';
 import { AuthLibService } from 'libs/auth-lib';
+import { SignUpInput } from 'libs/auth-lib/dto/sign-up.args';
 
 @ApiTags('auth')
 @Controller('auth')
@@ -14,7 +24,10 @@ export class AuthController {
     status: HttpStatus.OK,
     description: 'user created successfully',
   })
-  @ApiBadRequestResponse({status: HttpStatus.BAD_REQUEST, description: "Bad Request"})
+  @ApiBadRequestResponse({
+    status: HttpStatus.BAD_REQUEST,
+    description: 'Bad Request',
+  })
   @HttpCode(HttpStatus.OK)
   @Post('/sign-up')
   signUp(@Body() signUpDto: SignUpDto) {

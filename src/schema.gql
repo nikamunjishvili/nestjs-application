@@ -1,0 +1,27 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SignInPayload {
+  status: Boolean!
+  token: String!
+}
+
+type SignUpPayload {
+  success: Boolean!
+  message: String!
+}
+
+type Query {
+  me: String!
+}
+
+type Mutation {
+  signUp(signUp: SignUpInput!): SignUpPayload!
+  signIn(signIn: SignUpInput!): SignInPayload!
+}
+
+input SignUpInput {
+  email: String!
+  password: String!
+}
