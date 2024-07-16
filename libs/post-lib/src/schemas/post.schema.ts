@@ -1,12 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import mongoose, { Document } from 'mongoose';
 import { User } from 'libs/user-lib/schemas/user.schemas';
+import { ObjectType, Field, ID } from '@nestjs/graphql';
 
+@ObjectType()
 @Schema()
 export class Post extends Document {
+  @Field(() => ID)
+  _id?: mongoose.Schema.Types.ObjectId
+
+  @Field()
   @Prop()
   title: string;
 
+  @Field()
   @Prop()
   content: string;
 

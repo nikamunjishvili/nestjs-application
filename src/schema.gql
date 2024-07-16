@@ -2,6 +2,12 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Post {
+  _id: ID!
+  title: String!
+  content: String!
+}
+
 type SignInPayload {
   status: Boolean!
   token: String!
@@ -13,6 +19,7 @@ type SignUpPayload {
 }
 
 type Query {
+  getPosts: [Post!]!
   me: String!
 }
 
