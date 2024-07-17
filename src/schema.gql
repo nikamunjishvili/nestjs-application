@@ -8,6 +8,11 @@ type Post {
   content: String!
 }
 
+type PostPayload {
+  title: String!
+  content: String
+}
+
 type SignInPayload {
   status: Boolean!
   token: String!
@@ -24,8 +29,15 @@ type Query {
 }
 
 type Mutation {
+  createPost(input: CreatePostInput!): PostPayload!
   signUp(signUp: SignUpInput!): SignUpPayload!
   signIn(signIn: SignUpInput!): SignInPayload!
+}
+
+input CreatePostInput {
+  title: String!
+  content: String!
+  user: String
 }
 
 input SignUpInput {

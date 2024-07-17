@@ -24,5 +24,5 @@ export class AuthResolver {
   @Mutation(() => SignInPayload)
   signIn(@Args('signIn') signInInput: SignUpInput): Promise<SignInPayload> {
     return this.authService.signIn(signInInput);
-  }f
+  }
 }
