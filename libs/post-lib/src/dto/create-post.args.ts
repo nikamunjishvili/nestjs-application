@@ -1,4 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
+import mongoose from 'mongoose';
 
 @InputType()
 export class CreatePostInput {
@@ -8,6 +9,6 @@ export class CreatePostInput {
   @Field()
   content: string;
 
-  @Field({nullable: true})
-  user: string;
+  @Field(() => String, { nullable: true })
+  user: mongoose.Schema.Types.ObjectId;
 }

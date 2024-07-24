@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SignUpDto } from '../dto/sign-up.dto.';
-import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 import { SignInDto } from '../dto/sign-in.dto';
 import { JwtService } from '@nestjs/jwt';
 import { UserAlreadyExists } from '../errors/user.errors';
@@ -8,6 +7,7 @@ import { InvalidCredentials } from '../errors/invalid-credentials.error';
 import { UserLibService } from 'libs/user-lib';
 import { SignUpPayload } from '../dto/sign-up-payload.dto';
 import { SignInPayload } from '../dto/sign-in-payload.dto';
+import { SignUpDto } from '../dto/sign-up.dto.';
 
 @Injectable()
 export class AuthLibService {
@@ -22,21 +22,23 @@ export class AuthLibService {
     if (existingUser) throw UserAlreadyExists;
 
     const hashedPassword = await bcrypt.hash(password, 5);
-    this.usersService.create({ email, password: hashedPassword });
-    return {success: true, message: "User registered success!!"}
+    await this.usersService.create({ email, password: hashedPassword });
+    return { success: true, message: "User registered success!!" };
   }
 
-  async signIn(signInDto: SignInDto):Promise<SignInPayload> {
+  async signIn(signInDto: SignInDto): Promise<SignInPayload> {
     const { email, password } = signInDto;
     const user = await this.usersService.findOne(email);
-    const arePasswordsEqual = await bcrypt.compare(password, user.password);
+    if (!user) {
+      throw InvalidCredentials;
+    }
 
-    if (!user || !arePasswordsEqual) {
+    const arePasswordsEqual = await bcrypt.compare(password, user.password);
+    if (!arePasswordsEqual) {
       throw InvalidCredentials;
     }
 
     const access_token = await this.jwtService.sign({ email });
-
     return { status: true, token: access_token };
   }
 }

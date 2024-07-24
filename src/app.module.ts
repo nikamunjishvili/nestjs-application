@@ -17,7 +17,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       autoSchemaFile: './src/schema.gql',
       playground: true,
     }),
-    MongooseModule.forRoot("mongodb://localhost/27017"),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     PostModule,
     UserModule,
     AuthModule,
