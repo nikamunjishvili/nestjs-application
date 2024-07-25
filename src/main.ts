@@ -7,7 +7,11 @@ import { port } from './utils/constants/port.constant';
 async function bootstrap() {
   console.log("restarted app.......")
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: 'http://127.0.0.1:5500', 
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    credentials: true,
+  });
   app.useGlobalPipes(new ValidationPipe());
   swagger(app);
 
