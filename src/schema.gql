@@ -11,6 +11,7 @@ type Post {
 type PostPayload {
   title: String!
   content: String
+  user: String!
 }
 
 type SignInPayload {

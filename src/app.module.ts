@@ -6,6 +6,7 @@ import { AuthModule } from './common/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -17,10 +18,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
       autoSchemaFile: './src/schema.gql',
       playground: true,
     }),
-    MongooseModule.forRoot(process.env.MONGO_DEFAULT_URI),
+    MongooseModule.forRoot(process.env.MONGO_URI),
     PostModule,
     UserModule,
     AuthModule,
+    ChatModule,
   ],
   controllers: [],
   providers: [],
